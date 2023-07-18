@@ -6,11 +6,9 @@
     let promise = ""
 
     async function send(){
-        const res = await fetch('http://127.0.0.1:8000/animals/')
+        const res = await fetch('http://127.0.0.1:8000/animals')
         if (res.ok) {
-            let gg = await res.json()
-            console.log(gg[0])
-            return gg
+            promise = await res.json() 
         } else {
             throw new Error('Request failed')
         }
@@ -41,7 +39,7 @@
                     </svg>                                                 
                 </button>
                 <button class="rounded-md px-5 py-2 bg-black border border-white/20 hover:border-white/80 duration-150 flex items-center gap-2"
-                    on:click={()=>{ promise = send() }}
+                    on:click={()=>{ send() }}
                 >
                     Envoyer
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -55,7 +53,7 @@
 
         <div class="flex flex-col lg:flex-row gap-2">
             <button class="self-end h-fit rounded-md px-5 py-2 bg-black border border-white/20 hover:border-white/80 duration-150 flex items-center gap-2"
-                on:click={()=>{ promise = send() }}
+                on:click={()=>{ send() }}
             >
                 Actualiser
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

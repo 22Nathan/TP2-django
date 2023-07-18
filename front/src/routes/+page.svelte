@@ -3,6 +3,8 @@
 <script>
 
     import Get from "$lib/components/Get.svelte"
+    import GetAll from "$lib/components/GetAll.svelte"
+    import Add from "$lib/components/Add.svelte"
 
 </script>
 
@@ -30,6 +32,8 @@
         <div class="container mx-auto flex flex-col gap-10">
 
             <Get/>
+            <GetAll/>
+            <Add/>
 
         </div>
     </main>

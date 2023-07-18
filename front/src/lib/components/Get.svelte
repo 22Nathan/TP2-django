@@ -8,10 +8,10 @@
     let promise = ""
 
     async function send(){
-        if (input && input != ""){
-            const res = await fetch('http://127.0.0.1:8000/get')
+        if (input && input != "" && input != undefined){
+            const res = await fetch(`http://127.0.0.1:8000/animal/${input}`)
             if (res.ok) {
-                return await res.text()
+                promise = await res.json()
             } else {
                 throw new Error('Request failed')
             }
@@ -44,7 +44,7 @@
                     </svg>                                                 
                 </button>
                 <button class="rounded-md px-5 py-2 bg-black border border-white/20 hover:border-white/80 duration-150 flex items-center gap-2"
-                    on:click={()=>{ promise = send() }}
+                    on:click={()=>{ send() }}
                 >
                     Envoyer
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -57,12 +57,14 @@
         <div class="h-px bg-white/10 w-[calc(100%+80px)] -translate-x-10"/>
 
         <div class="flex flex-col lg:flex-row gap-2">
-            <div class="w-full">
-                <p class="pb-1">Renseigner l'ID :int</p>
-                <input bind:value={input} class="w-full duration-200 bg-transparent border border-white/10 rounded-md p-2" type="number" min="0" placeholder="ID">
+            <div class="w-full flex flex-col gap-2">
+                <div class="flex gap-4">
+                    <p class="pb-1 shrink-0">Renseigner l'ID :int</p>
+                    <input bind:value={input} class="w-full duration-200 bg-transparent border border-white/10 rounded-md p-2" type="number" min="0" placeholder="ID">
+                </div>
             </div>
             <button class="self-end h-fit rounded-md px-5 py-2 bg-black border border-white/20 hover:border-white/80 duration-150 flex items-center gap-2"
-                on:click={()=>{ promise = send() }}
+                on:click={()=>{ send() }}
             >
                 Actualiser
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -80,7 +82,15 @@
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                 {:then res}
-                    <p>{res}</p>
+                    <div class="flex flex-wrap gap-1 pt-4">
+                        {#each Object.keys(res) as key }
+                            <p class="px-3 bg-white/5 rounded flex gap-3 flex-nowrap">
+                                <span class="text-white/80 uppercase"> {key} </span> 
+                                : 
+                                <span class="text-white"> {res[key]} </span>
+                            </p>
+                        {/each}
+                    </div>
                 {:catch error}
                     <p class="text-red-500">{error}</p>
                 {/await}

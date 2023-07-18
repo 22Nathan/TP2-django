@@ -26,13 +26,14 @@ def getCategoriesAnimals(request):
 @api_view(['GET'])
 def getAnimalsById(request, id):
     animal = Animal.objects.get(id=id) 
-    serializer = AnimalSerializer(animal, many=True)
+    serializer = AnimalSerializer(animal)
     return Response(serializer.data)
 
 # --------------------------------------------------------------------------------
 
 @api_view(['POST'])
 def addAnimal(request):
+    print(request.data)
     serializer = AnimalSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
