@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import *
-from .serializers import AnimalSerializer
+from .serializers import AnimalSerializer, AnimalTypeSerializer
 from rest_framework import status
 
 # Create your views here.
@@ -12,6 +12,13 @@ from rest_framework import status
 def getAnimals(request):
     lesAnimaux = Animal.objects.all()[:10] 
     serializer = AnimalSerializer(lesAnimaux, many=True)
+    return Response(serializer.data)
+
+# --------------------------------------------------------------------------------
+@api_view(['GET'])
+def getCategoriesAnimals(request):
+    lesTypesAnimaux = AnimalType.objects.all() 
+    serializer = AnimalTypeSerializer(lesTypesAnimaux, many=True)
     return Response(serializer.data)
 
 # --------------------------------------------------------------------------------
