@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply
+    bg-cover bg-no-repeat bg-[50%] px-4 bg-black text-white bg-[url('bg-dark.png')] min-h-screen
+}
+
+.gradient-heading-1 { @apply 
+    bg-clip-text text-transparent box-decoration-clone bg-gradient-to-br from-[#ff4d4d] to-[#f9cb28]
+}
+
+.gradient-heading-2 { @apply 
+    bg-clip-text text-transparent box-decoration-clone bg-gradient-to-br from-[#007cf0] to-[#00dfd8]
+}
+
+.gradient-heading-3 { @apply 
+    bg-clip-text text-transparent box-decoration-clone bg-gradient-to-br from-[#7928ca] to-[#ff0080]
+}
+
+.title { @apply
+    font-bold tracking-tighter
+}
