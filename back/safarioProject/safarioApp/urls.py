@@ -6,4 +6,5 @@ urlpatterns = [
     path('addAnimals/', addAnimal),
     path('updateAnimals/<int:id>', updateAnimal),
     path('deleteAnimals/<int:id>', deleteAnimal),
+    path('animal/<int:id>', getAnimalsById),
 ]

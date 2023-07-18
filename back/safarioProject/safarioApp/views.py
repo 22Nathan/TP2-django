@@ -10,8 +10,16 @@ from rest_framework import status
 # --------------------------------------------------------------------------------
 @api_view(['GET'])
 def getAnimals(request):
-    lesAnimaux = Animal.objects.all()
+    lesAnimaux = Animal.objects.all()[:10] 
     serializer = AnimalSerializer(lesAnimaux, many=True)
+    return Response(serializer.data)
+
+# --------------------------------------------------------------------------------
+
+@api_view(['GET'])
+def getAnimalsById(request, id):
+    animal = Animal.objects.get(id=id) 
+    serializer = AnimalSerializer(animal, many=True)
     return Response(serializer.data)
 
 # --------------------------------------------------------------------------------
