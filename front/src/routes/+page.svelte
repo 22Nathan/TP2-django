@@ -2,9 +2,12 @@
 
 <script>
 
+    import Count from "$lib/components/Count.svelte"
     import Get from "$lib/components/Get.svelte"
     import GetAll from "$lib/components/GetAll.svelte"
     import Add from "$lib/components/Add.svelte"
+    import Update from "$lib/components/Update.svelte"
+    import Delete from "$lib/components/Delete.svelte"
 
 </script>
 
@@ -31,9 +34,12 @@
 
         <div class="container mx-auto flex flex-col gap-10">
 
+            <Count/>
             <Get/>
             <GetAll/>
             <Add/>
+            <Update/>
+            <Delete/>
 
         </div>
     </main>

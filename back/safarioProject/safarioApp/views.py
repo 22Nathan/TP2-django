@@ -33,7 +33,6 @@ def getAnimalsById(request, id):
 
 @api_view(['POST'])
 def addAnimal(request):
-    print(request.data)
     serializer = AnimalSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -42,7 +41,6 @@ def addAnimal(request):
 # --------------------------------------------------------------------------------
 
 @api_view(['PUT'])
-
 def updateAnimal(request, id):
     try:
         animal = Animal.objects.get(id=id)
@@ -58,13 +56,18 @@ def updateAnimal(request, id):
 # --------------------------------------------------------------------------------
 
 @api_view(['DELETE'])
-
 def deleteAnimal(request, id):
     try:
         animal = Animal.objects.get(id=id)
     except Animal.DoesNotExist:
         return Response(status = status.HTTP_404_NOT_FOUND)
+    serializer = AnimalSerializer(animal)
     animal.delete()
-    return Response(status= status.HTTP_204_NO_CONTENT)
+    return Response(serializer.data)
 
 # --------------------------------------------------------------------------------
+
+@api_view(['GET'])
+def getNbAnimals(request):
+    animaux = Animal.objects.all()
+    return Response(len(animaux))

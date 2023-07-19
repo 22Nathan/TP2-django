@@ -19,7 +19,11 @@
     /** @type {any} */
     let input5
     /** @type {any} */
-    let input6 = "Mammifères"
+    let input6 = 4
+
+    let inputs = [
+        input1, input2, input3, input4, input5, input6
+    ]
 
     /** @type {any} */
     let categories = ""
@@ -36,6 +40,11 @@
     }
 
     async function send(){
+        let check = true
+        inputs.forEach(elem => {
+            if( elem == undefined || elem == "" || elem == null ){ check = false }
+        })
+        if( !check ){ return }
         const res = await fetch('http://127.0.0.1:8000/addAnimals', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
